@@ -11,10 +11,10 @@ def w209():
     file = 'about9.jpg'
     return render_template('w209.html', file=file)
 
-# Route to serve the D3 example page
-@app.route('/temp')
-def temp():
-    return render_template('temp.html')
+# # Route to serve the D3 example page
+# @app.route('/temp')
+# def temp():
+#     return render_template('temp.html')
 
 
 # # Dynamic data endpoint for D3
