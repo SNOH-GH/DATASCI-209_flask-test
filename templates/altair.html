@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  https://cdn.jsdelivr.net/npm/vega@5>
+  https://cdn.jsdelivr.net/npm/vega-lite@5>
+  https://cdn.jsdelivr.net/npm/vega-embed@6script>
+</head>
+
+<body>
+
+<h2>FIFA Player Chart</h2>
+
+<button onclick="loadChart()">Load Chart</button>
+
+<div id="vis"></div>
+
+<script>
+function loadChart() {
+  fetch('/altair-chart')
+    .then(res => res.json())
+    .then(spec => {
+      vegaEmbed('#vis', spec);
+    });
+}
+</script>
+
+</body>
+</html>
