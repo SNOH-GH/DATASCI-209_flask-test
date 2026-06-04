@@ -38,7 +38,8 @@ def getData(year):
 @app.route("/altair-chart")
 def altair_chart():
 
-    df = pd.read_csv(os.path.join(APP_FOLDER, "static/data/players_20.csv"))
+    df_global = pd.read_csv(os.path.join(APP_FOLDER, "static/data/players_20.csv"))
+    df = df_global
 
     output = df.groupby("nationality")\
         .agg(num_players=("nationality", "count"),
