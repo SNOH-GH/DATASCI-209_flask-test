@@ -1,4 +1,7 @@
 
+from sqlite3
+from unittest import result 
+
 from flask import Flask, jsonify, render_template
 import pandas as pd
 import os
@@ -6,6 +9,8 @@ import os
 from flask import jsonify
 import altair as alt
 from altair import datum
+
+from dbm import sqlite3
 
 
 app = Flask(__name__)
@@ -120,9 +125,16 @@ def altair_page():
 
 @app.route('/api')
 def api():
+
     #retun a json respones with the key 'x' and integer value 
     return {"x": 20}#jsonify({"x": 15})
 
-
+@app.route('/players/count')
+def players_count():
+    con = sqlite3.connect(os.path.join(APP_FOLDER, "static/data/players_20.db"))
+    cur = con.cursor()
+    result =cur.execute("SELECT COUNT(*) FROM players")
+   # result = cur.fetchone()
+    return {"count": result[0]}  
 if __name__ == '__main__':
     app.run()
