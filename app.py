@@ -18,9 +18,9 @@ def w209():
     return render_template('w209.html', file=file)
 
 # Route to serve the D3 example page
-@app.route('/temp')
-def temp():
-    return render_template('temp.html')
+@app.route('/map')
+def map():
+    return render_template('map.html')
 
 
 # Dynamic data endpoint for D3
@@ -118,6 +118,10 @@ def altair_chart():
 def altair_page():
     return render_template('altair.html')
 
+@app.route('/api')
+def api():
+    #retun a json respones with the key 'x' and integer value 
+    return {"x": 20}#jsonify({"x": 15})
 
 
 if __name__ == '__main__':
