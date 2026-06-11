@@ -2,4 +2,3 @@ flask
 pandas
 altair
 sqlite3
-csv
