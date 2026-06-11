@@ -10,5 +10,7 @@
 </form>
 <button onclick="window.location.href='/altair'">Load Altair Example</button>
 <button onclick="window.location.href='/players/count'">Load Players Count</button>
+<input type="text" id="player" name="player" placeholder="Enter player name">
+<button onclick="window.location.href='/players/get_nationality?player=' + document.getElementById('player').value">Get Player Nationality</button>
 </body>
 </html>

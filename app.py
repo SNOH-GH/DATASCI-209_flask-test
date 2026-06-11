@@ -1,16 +1,14 @@
 
-from sqlite3
+import sqlite3, csv
 from unittest import result 
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import pandas as pd
 import os
 
 from flask import jsonify
 import altair as alt
 from altair import datum
-
-from dbm import sqlite3
 
 
 app = Flask(__name__)
@@ -133,8 +131,21 @@ def api():
 def players_count():
     con = sqlite3.connect(os.path.join(APP_FOLDER, "static/data/players_20.db"))
     cur = con.cursor()
-    result =cur.execute("SELECT COUNT(*) FROM players")
-   # result = cur.fetchone()
-    return {"count": result[0]}  
+    result = cur.execute("SELECT COUNT(*) FROM players").fetchone()
+    return {"count": result[0]}
+
+@app.route('/players/get_nationality')
+def get_nationality():
+    con = sqlite3.connect(os.path.join(APP_FOLDER, "static/data/players_20.db"))
+    cur = con.cursor()
+    player = request.args.get('player')
+    row = cur.execute(
+        "SELECT nationality FROM players WHERE short_name = ?",
+        (player,)
+    ).fetchone()
+    if row is None:
+        return {"?": f"Player '{player}' not found"}, 404
+    return {"nationality": row[0]}
+
 if __name__ == '__main__':
     app.run()
