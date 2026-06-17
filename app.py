@@ -116,6 +116,9 @@ def altair_chart():
     return jsonify(final_chart.to_dict())
 
 
+@app.route('/observable')
+def observable_page():
+    return render_template('observable.html')
 
 @app.route('/altair')
 def altair_page():
