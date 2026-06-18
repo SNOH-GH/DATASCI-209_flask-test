@@ -8,7 +8,14 @@
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@d3/line-with-tooltip.js?v=4";
 
+const response = await fetch("{{ url_for('static', filename='data/data.json') }}");
+const rawData = await response.json();
 
+// help from AI for converting the data..
+const newData = rawData.map(d => ({
+  date: new Date(d.Date),
+  close: d.Close
+}));
 
 const main = new Runtime().module(define, name => {
   if (name === "chart") {
@@ -17,16 +24,6 @@ const main = new Runtime().module(define, name => {
   return ["focus"].includes(name);
 });
 
+main.redefine("aapl", newData);
 
-const response = await fetch("{{ url_for('static', filename='data/data.json') }}");
-const rawData = await response.json();
-
-// Help from Copilot to convert the data
-const newData = rawData.map(d => ({
-  date: new Date(d.Date),
-  close: d.Close
-}));
-
-
-main.redefine("data", newData);
 </script>
