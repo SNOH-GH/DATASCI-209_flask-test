@@ -1,2 +1,14 @@
 <iframe width="100%" height="485" frameborder="0"
   src="https://observablehq.com/embed/e36624b82a8f0b5a@352?cells=svg"></iframe>
+
+  <div id="observablehq-svg-bdbe97c2"></div>
+<p>Credit: <a href="https://observablehq.com/d/e36624b82a8f0b5a@352">D3 Donut Chart by Daekyoung (Sid) Noh</a></p>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+<script type="module">
+import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+import define from "https://api.observablehq.com/d/e36624b82a8f0b5a@352.js?v=4";
+new Runtime().module(define, name => {
+  if (name === "svg") return new Inspector(document.querySelector("#observablehq-svg-bdbe97c2"));
+});
+</script>
