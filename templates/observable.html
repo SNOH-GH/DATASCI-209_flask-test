@@ -7,9 +7,26 @@
 <script type="module">
 import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
 import define from "https://api.observablehq.com/@d3/line-with-tooltip.js?v=4";
-new Runtime().module(define, name => {
-  if (name === "chart") return new Inspector(document.querySelector("#observablehq-chart-c196b206"));
+
+
+
+const main = new Runtime().module(define, name => {
+  if (name === "chart") {
+    return new Inspector(document.querySelector("#observablehq-chart-c196b206"));
+  }
   return ["focus"].includes(name);
 });
 
+
+const response = await fetch("{{ url_for('static', filename='data/data.json') }}");
+const rawData = await response.json();
+
+// Help from Copilot to convert the data
+const newData = rawData.map(d => ({
+  date: new Date(d.Date),
+  close: d.Close
+}));
+
+
+main.redefine("data", newData);
 </script>
